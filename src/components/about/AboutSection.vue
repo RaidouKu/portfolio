@@ -1,24 +1,70 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { profile } from '../../assets/data/profile.js'
-import { createSectionReveal, createStaggerReveal } from '../../utils/animations.js'
-import ProgressBar from '../ui/ProgressBar.vue'
+import { createSectionReveal } from '../../utils/animations.js'
+import Keycap3D from '../ui/Keycap3D.vue'
 
 const sectionRef = ref(null)
-const skillsRef = ref(null)
+const soundEnabled = ref(true)
+const clickCount = ref(0)
 
-const skillCategories = [
-  { key: 'design', num: '01', label: 'DESIGN & UI/UX' },
-  { key: 'frontend', num: '02', label: 'FRONTEND STACK' },
-  { key: 'backend', num: '03', label: 'BACKEND SYSTEMS' },
-  { key: 'tools', num: '04', label: 'TOOLING & WORKFLOW' },
+// Assemble 4x3 mechanical macropad skills with 3D colorway variants
+const allSkills = [
+  // Row 1: Design & Creative (Vermillion Artisan Novelty Caps)
+  { ...profile.skills.design[0], category: 'DESIGN & UI/UX', variant: 'vermillion' },
+  { ...profile.skills.design[1], category: 'DESIGN & UI/UX', variant: 'vermillion' },
+  { ...profile.skills.design[2], category: 'DESIGN & UI/UX', variant: 'vermillion' },
+  { ...profile.skills.tools[0], category: 'DESIGN & UI/UX', variant: 'vermillion' },
+
+  // Row 2: Frontend Engineering (Cream Alphas + Vue Accent)
+  { ...profile.skills.frontend[0], category: 'FRONTEND STACK', variant: 'default' },
+  { ...profile.skills.frontend[1], category: 'FRONTEND STACK', variant: 'default' },
+  { ...profile.skills.frontend[2], category: 'FRONTEND STACK', variant: 'vermillion' },
+  { ...profile.skills.frontend[3], category: 'FRONTEND STACK', variant: 'default' },
+
+  // Row 3: Systems & Tooling (Dark & Ochre Modifiers)
+  { ...profile.skills.backend[0], category: 'BACKEND SYSTEMS', variant: 'ink' },
+  { ...profile.skills.backend[1], category: 'BACKEND SYSTEMS', variant: 'ink' },
+  { ...profile.skills.tools[1], category: 'TOOLING & GIT', variant: 'ochre' },
+  { ...profile.skills.tools[2], category: 'TOOLING & DEV', variant: 'ochre' },
 ]
+
+// Default selected skill is Vue.js
+const selectedSkill = ref(allSkills[6])
+
+function playSwitchSound() {
+  clickCount.value++
+  if (!soundEnabled.value) return
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext
+    if (!AudioCtx) return
+    const ctx = new AudioCtx()
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = 'triangle'
+    osc.frequency.setValueAtTime(170, ctx.currentTime)
+    osc.frequency.exponentialRampToValueAtTime(32, ctx.currentTime + 0.04)
+
+    gain.gain.setValueAtTime(0.25, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04)
+
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+
+    osc.start()
+    osc.stop(ctx.currentTime + 0.045)
+  } catch (e) {
+    // Audio context may require prior user interaction
+  }
+}
+
+function handleKeySelect(skill) {
+  selectedSkill.value = skill
+  playSwitchSound()
+}
 
 onMounted(() => {
   createSectionReveal(sectionRef.value)
-  if (skillsRef.value) {
-    createStaggerReveal(skillsRef.value, '[data-skill-card]', 0.1)
-  }
 })
 </script>
 
@@ -41,7 +87,7 @@ onMounted(() => {
             SECTION 01
           </span>
           <span class="font-mono text-xs text-stone tracking-[0.2em] uppercase">
-            PROFILE &amp; DIAGNOSTICS
+            PROFILE &amp; 3D KEYCAP SWITCHBOARD
           </span>
         </div>
         <h2 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
@@ -50,7 +96,7 @@ onMounted(() => {
         <div class="rule-red w-20 mt-4"></div>
       </div>
 
-      <!-- Bio + Skills Grid -->
+      <!-- Bio + 3D Keycap Switchboard Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <!-- Bio Card (Editorial Dossier) -->
         <div class="lg:col-span-5">
@@ -80,31 +126,110 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Skills Panels -->
-        <div class="lg:col-span-7" ref="skillsRef">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div
-              v-for="category in skillCategories"
-              :key="category.key"
-              data-skill-card
-              class="bg-cream-dark border border-stone-light hover:border-vermillion transition-colors p-5"
-            >
-              <div class="flex items-center justify-between mb-4 border-b border-stone-light pb-2">
+        <!-- 3D Interactive Mechanical Keycaps Switchboard -->
+        <div class="lg:col-span-7">
+          <div class="bg-cream-dark border-2 border-ink p-6 sm:p-7 shadow-[6px_6px_0px_0px_#1a1a1a]">
+            <!-- Deck Control Bar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-stone-light gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 bg-vermillion rounded-full animate-pulse" />
                 <span class="font-mono text-xs font-bold text-ink uppercase tracking-wider">
-                  {{ category.label }}
-                </span>
-                <span class="font-mono text-[10px] text-vermillion font-bold">
-                  {{ category.num }}
+                  3D KEYCAP MACROPAD // SKILL MATRIX
                 </span>
               </div>
 
-              <div class="space-y-3.5">
-                <ProgressBar
-                  v-for="skill in profile.skills[category.key]"
-                  :key="skill.name"
-                  :label="skill.name"
-                  :value="skill.level"
-                />
+              <!-- Sound Toggle & Click Counter -->
+              <div class="flex items-center gap-3 font-mono text-[11px]">
+                <button
+                  type="button"
+                  class="px-2 py-0.5 border border-ink text-ink font-bold hover:bg-ink hover:text-cream transition-colors cursor-pointer"
+                  @click="soundEnabled = !soundEnabled"
+                >
+                  {{ soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF' }}
+                </button>
+                <span class="text-stone">
+                  CLICKS: <strong class="text-vermillion">{{ clickCount }}</strong>
+                </span>
+              </div>
+            </div>
+
+            <!-- The 3D Keycap Grid (4x3 Macropad) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pb-4">
+              <Keycap3D
+                v-for="skill in allSkills"
+                :key="skill.name"
+                :skill="skill"
+                :variant="skill.variant"
+                :active="selectedSkill?.name === skill.name"
+                @click="handleKeySelect"
+              />
+            </div>
+
+            <!-- Interactive HUD Inspector Plate for Pressed Keycap -->
+            <div
+              v-if="selectedSkill"
+              class="mt-4 p-4 sm:p-5 bg-cream border-2 border-ink flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
+            >
+              <div class="space-y-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 bg-vermillion text-cream font-mono text-[10px] font-bold uppercase tracking-wider">
+                    KEY [ {{ selectedSkill.key }} ]
+                  </span>
+                  <span class="font-mono text-[10px] text-stone font-bold uppercase">
+                    // {{ selectedSkill.category }}
+                  </span>
+                  <span class="font-mono text-xs text-vermillion font-bold">
+                    {{ selectedSkill.jp }}
+                  </span>
+                </div>
+                <h4 class="font-display font-extrabold text-lg text-ink">
+                  {{ selectedSkill.name }}
+                </h4>
+                <p class="font-body text-xs text-stone max-w-md leading-relaxed">
+                  {{ selectedSkill.desc }}
+                </p>
+              </div>
+
+              <!-- Proficiency Gauge -->
+              <div class="flex-shrink-0 text-left sm:text-right w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-stone-light">
+                <div class="font-mono text-[10px] text-stone uppercase tracking-wider">
+                  PROFICIENCY
+                </div>
+                <div class="font-display font-black text-2xl text-vermillion">
+                  {{ selectedSkill.level }}%
+                </div>
+                <!-- Mini Bar -->
+                <div class="w-28 sm:w-28 h-1.5 bg-stone-light mt-1 overflow-hidden">
+                  <div
+                    class="h-full bg-vermillion transition-all duration-300"
+                    :style="{ width: `${selectedSkill.level}%` }"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Keycap Colorway Legend -->
+            <div class="mt-4 pt-3 border-t border-stone-light flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] text-stone">
+              <div class="flex items-center gap-4 flex-wrap">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 bg-vermillion border border-ink"></span>
+                  DESIGN &amp; NOVELTY
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 bg-cream border border-ink"></span>
+                  FRONTEND ALPHAS
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 bg-indigo border border-ink"></span>
+                  BACKEND
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 bg-ochre border border-ink"></span>
+                  DEV TOOLS
+                </span>
+              </div>
+              <div>
+                * PRESS ANY KEYCAP FOR TACTILE SFX
               </div>
             </div>
           </div>
