@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent-teal: #00e5c3;
+    --accent-amber: #f0a030;
+    --accent-red: #ff3b4e;
+    --bg-primary: #0a0e14;
+    --bg-secondary: #111923;
+    --text-primary: #e8ece4;
+    --text-muted: #5a6a7a;
+    --border-glow: rgba(0, 229, 195, 0.15);
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-body antialiased overflow-x-hidden;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+  }
+
+  /* Skip-to-content link */
+  .skip-link {
+    @apply absolute -translate-y-full bg-accent-teal text-bg-primary font-mono text-sm px-4 py-2 z-50;
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+
+  /* Placeholder marker styling */
+  .placeholder-marker {
+    @apply border border-dashed border-text-muted px-3 py-2 text-text-muted font-mono text-sm italic;
+  }
+}
+
+@layer utilities {
+  .text-glow-teal {
+    text-shadow: 0 0 5px rgba(0, 229, 195, 0.6),
+                 0 0 10px rgba(0, 229, 195, 0.4),
+                 0 0 20px rgba(0, 229, 195, 0.2);
+  }
+  .text-glow-amber {
+    text-shadow: 0 0 5px rgba(240, 160, 48, 0.6),
+                 0 0 10px rgba(240, 160, 48, 0.4);
+  }
+}

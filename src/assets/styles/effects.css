@@ -1,0 +1,94 @@
+/* ===== SCAN LINES ===== */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.scanline-sweep {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 229, 195, 0) 0%,
+    rgba(0, 229, 195, 0.08) 50%,
+    rgba(0, 229, 195, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+  animation: sweep 8s linear infinite;
+}
+
+@keyframes sweep {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ===== CRT NOISE ===== */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== GRID BACKGROUND ===== */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 229, 195, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 195, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center center;
+}
+
+/* ===== GLASS PANEL ===== */
+.glass-panel {
+  background: rgba(17, 25, 35, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 195, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5),
+              inset 0 0 20px rgba(0, 229, 195, 0.05);
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 229, 195, 0.35);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5),
+              inset 0 0 30px rgba(0, 229, 195, 0.1);
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .scanline-sweep,
+  .scanlines {
+    display: none;
+  }
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
