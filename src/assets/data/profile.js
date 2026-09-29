@@ -3,7 +3,11 @@ export const profile = {
   displayName: 'Lebron James',
   avatarUrl: null, // Set to path e.g. '/assets/images/profile.jpg' when ready
   tagline: 'UI/UX Designer & Developer',
-  bio: '[PLACEHOLDER: 2-3 sentences about who you are, what you\'re passionate about, what drives you]',
+  bio: `I am a 3rd-year Bachelor of Science in Information Technology (BSIT) student at the National College of Science and Technology (NCST). My work lives at the intersection of user interface ergonomics and full-stack software development—transforming conceptual wireframes into accessible, high-performance web applications.
+
+Currently, I am actively broadening my engineering spectrum across both ends of the stack. On the frontend, I build responsive, component-driven interfaces with Vue and Tailwind CSS, focusing on tactile micro-interactions and rigorous typography. On the backend, I design relational database architectures and server-side systems using PHP and MySQL, ensuring that every interface is backed by dependable logic.
+
+My goal is end-to-end craft: shaping intuitive user experiences in Figma and engineering them into clean, production-ready code without relying on generic templates.`,
   school: 'National College of Science and Technology',
   email: 'pangan.lebronjames1@ncst.edu.ph',
   github: 'https://github.com/RaidouKu',

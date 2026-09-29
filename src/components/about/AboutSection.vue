@@ -108,19 +108,24 @@ onMounted(() => {
               <span class="font-mono text-[11px] text-stone">NCST-PH</span>
             </div>
 
-            <p class="text-ink leading-relaxed font-body text-sm sm:text-base mb-6">
+            <div class="text-ink leading-relaxed font-body text-sm sm:text-base mb-6 space-y-3">
               <span v-if="profile.bio.startsWith('[PLACEHOLDER')" class="placeholder-marker block">
                 {{ profile.bio }}
               </span>
-              <span v-else>{{ profile.bio }}</span>
-            </p>
+              <template v-else>
+                <p v-for="(paragraph, idx) in profile.bio.split('\n\n')" :key="idx">
+                  {{ paragraph }}
+                </p>
+              </template>
+            </div>
 
             <div class="pt-4 border-t border-stone-light">
               <div class="font-mono text-xs text-stone space-y-1.5">
                 <div><span class="text-ink font-semibold">SUBJECT:</span> {{ profile.name }}</div>
                 <div><span class="text-ink font-semibold">AFFILIATION:</span> {{ profile.school }}</div>
-                <div><span class="text-ink font-semibold">ACADEMIC:</span> B.S. Information Technology</div>
-                <div><span class="text-ink font-semibold">FOCUS:</span> Interface Ergonomics &amp; Web Architectures</div>
+                <div><span class="text-ink font-semibold">YEAR LEVEL:</span> 3rd Year Undergraduate</div>
+                <div><span class="text-ink font-semibold">PROGRAM:</span> B.S. Information Technology (BSIT)</div>
+                <div><span class="text-ink font-semibold">DISCIPLINE:</span> Frontend &amp; Backend Engineering</div>
               </div>
             </div>
           </div>
