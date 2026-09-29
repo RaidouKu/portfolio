@@ -81,9 +81,25 @@ onMounted(() => {
               </span>
             </div>
 
-            <!-- Big Display Name, Portrait Frame & Hanko -->
+            <!-- Big Display Name, Hanko & Portrait Frame (on the right) -->
             <div class="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
-              <!-- Portrait Photo Frame (Manga/Dossier style) -->
+              <!-- Name & Hanko Stamp -->
+              <div>
+                <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
+                  <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-ink uppercase leading-none">
+                    LEBRON JAMES<span class="text-vermillion">.</span>
+                  </h1>
+                  <div class="hanko">
+                    LJ
+                  </div>
+                </div>
+                <!-- Full Name & Subtitle -->
+                <h2 class="font-heading font-bold text-lg sm:text-xl text-stone tracking-tight mt-2">
+                  {{ profile.name }}
+                </h2>
+              </div>
+
+              <!-- Portrait Photo Frame (Manga/Dossier style on the right) -->
               <div class="relative flex-shrink-0">
                 <div class="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 border-2 border-ink bg-cream-dark p-1 shadow-[4px_4px_0px_0px_#1a1a1a] relative overflow-hidden">
                   <img
@@ -119,22 +135,6 @@ onMounted(() => {
                 <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-ink text-cream text-[8px] font-mono px-1.5 py-0.2 tracking-wider uppercase font-bold whitespace-nowrap">
                   ID // 01
                 </div>
-              </div>
-
-              <!-- Name & Hanko Stamp -->
-              <div>
-                <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
-                  <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-ink uppercase leading-none">
-                    LEBRON JAMES<span class="text-vermillion">.</span>
-                  </h1>
-                  <div class="hanko">
-                    LJ
-                  </div>
-                </div>
-                <!-- Full Name & Subtitle -->
-                <h2 class="font-heading font-bold text-lg sm:text-xl text-stone tracking-tight mt-2">
-                  {{ profile.name }}
-                </h2>
               </div>
             </div>
 
