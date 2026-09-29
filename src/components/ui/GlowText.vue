@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   tag: { type: String, default: 'span' },
-  color: { type: String, default: 'teal' },
+  color: { type: String, default: 'red' },
 })
 </script>
 
@@ -9,8 +9,9 @@ defineProps({
   <component
     :is="tag"
     :class="{
-      'text-accent-teal text-glow-teal': color === 'teal',
-      'text-accent-amber text-glow-amber': color === 'amber',
+      'text-vermillion': color === 'red' || color === 'teal',
+      'text-ochre': color === 'amber' || color === 'ochre',
+      'text-indigo': color === 'indigo',
     }"
   >
     <slot />

@@ -1,21 +1,19 @@
 <script setup>
 defineProps({
   text: { type: String, required: true },
-  color: { type: String, default: 'teal' },
+  color: { type: String, default: 'red' },
 })
 </script>
 
 <template>
   <span
-    class="font-mono text-xs uppercase tracking-widest inline-flex items-center gap-0.5"
+    class="font-mono text-xs uppercase tracking-[0.15em] inline-flex items-center gap-1"
     :class="{
-      'text-accent-teal': color === 'teal',
-      'text-accent-amber': color === 'amber',
-      'text-accent-red': color === 'red',
+      'text-vermillion': color === 'red' || color === 'teal',
+      'text-ochre': color === 'amber' || color === 'ochre',
+      'text-stone': color === 'muted',
     }"
   >
-    <span class="text-text-muted">[</span>
     {{ text }}
-    <span class="text-text-muted">]</span>
   </span>
 </template>

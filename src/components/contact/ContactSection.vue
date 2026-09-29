@@ -2,18 +2,15 @@
 import { ref, onMounted } from 'vue'
 import { profile } from '../../assets/data/profile.js'
 import { createSectionReveal } from '../../utils/animations.js'
-import GlassPanel from '../ui/GlassPanel.vue'
-import SystemLabel from '../ui/SystemLabel.vue'
 import TechButton from '../ui/TechButton.vue'
 
 const sectionRef = ref(null)
 
 const contactLines = [
-  { label: 'EMAIL', value: profile.email, href: `mailto:${profile.email}` },
-  { label: 'GITHUB', value: '@RaidouKu', href: profile.github },
+  { label: 'DIRECT EMAIL', value: profile.email, href: `mailto:${profile.email}` },
+  { label: 'GITHUB REPOSITORY', value: '@RaidouKu', href: profile.github },
 ]
 
-// Add socials if they exist
 Object.entries(profile.socials).forEach(([key, value]) => {
   if (value) {
     contactLines.push({ label: key.toUpperCase(), value, href: value })
@@ -29,55 +26,77 @@ onMounted(() => {
   <section
     id="contact"
     ref="sectionRef"
-    class="relative py-20 lg:py-28 px-4 sm:px-6"
+    class="relative py-24 px-4 sm:px-6 lg:px-12 border-t-2 border-ink overflow-hidden"
   >
-    <div class="max-w-content mx-auto max-w-2xl">
-      <!-- Section header -->
-      <div class="mb-12 text-center">
-        <SystemLabel text="CONNECT" color="teal" class="mb-3 block" />
-        <h2 class="font-heading font-bold text-3xl sm:text-4xl text-text-primary tracking-wide">
-          Contact<span class="text-accent-teal">_</span>
+    <!-- Background Watermark -->
+    <div class="absolute right-8 top-12 section-number">
+      03
+    </div>
+
+    <div class="max-w-content mx-auto max-w-3xl relative z-10">
+      <!-- Section Header -->
+      <div class="mb-14 text-center sm:text-left">
+        <div class="flex items-center justify-center sm:justify-start gap-3 mb-2">
+          <span class="px-2 py-0.5 bg-vermillion text-cream font-mono text-[10px] uppercase tracking-wider font-bold">
+            SECTION 03
+          </span>
+          <span class="font-mono text-xs text-stone tracking-[0.2em] uppercase">
+            COMMUNICATIONS
+          </span>
+        </div>
+        <h2 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
+          GET IN TOUCH<span class="text-vermillion">.</span>
         </h2>
-        <p class="mt-4 text-text-muted font-body">
-          Open to opportunities, collaborations, and conversations.
+        <div class="rule-red w-20 mt-4 mx-auto sm:mx-0"></div>
+        <p class="mt-4 text-stone font-body text-base max-w-xl">
+          Interested in working together or exploring a design collaboration? Send a dispatch.
         </p>
       </div>
 
-      <!-- Terminal-style contact card -->
-      <GlassPanel>
-        <div class="font-mono text-sm space-y-3">
-          <div class="text-text-muted mb-4">
-            <span class="text-accent-teal">visitor@portfolio</span>:<span class="text-accent-amber">~</span>$ cat contact.info
+      <!-- Editorial Dispatch Card -->
+      <div class="bg-cream-dark border-2 border-ink p-8 sm:p-10 shadow-[8px_8px_0px_0px_#1a1a1a]">
+        <div class="flex items-start justify-between border-b-2 border-ink pb-4 mb-6">
+          <div>
+            <div class="font-mono text-xs text-vermillion font-bold uppercase tracking-widest">
+              OFFICIAL DISPATCH
+            </div>
+            <div class="font-display font-extrabold text-xl text-ink">
+              LEBRON JAMES PANGAN
+            </div>
           </div>
+          <div class="hanko">
+            KU
+          </div>
+        </div>
 
+        <div class="space-y-4 mb-8">
           <div
             v-for="item in contactLines"
             :key="item.label"
-            class="flex items-start gap-3"
+            class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-cream border border-stone-light hover:border-vermillion transition-colors gap-2"
           >
-            <span class="text-text-muted min-w-[80px]">{{ item.label }}:</span>
+            <span class="font-mono text-xs text-stone font-semibold tracking-wider">
+              {{ item.label }}:
+            </span>
             <a
               :href="item.href"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-accent-teal hover:text-accent-teal-hover transition-colors duration-200 underline underline-offset-4 decoration-accent-teal/30 hover:decoration-accent-teal break-all"
+              class="font-mono text-xs text-ink hover:text-vermillion font-bold transition-colors underline underline-offset-4 decoration-vermillion/40 hover:decoration-vermillion break-all"
             >
-              {{ item.value }}
+              {{ item.value }} &rarr;
             </a>
           </div>
-
-          <div class="mt-6 pt-4 border-t border-text-muted/20 text-text-muted">
-            <span class="text-accent-teal">visitor@portfolio</span>:<span class="text-accent-amber">~</span>$
-            <span class="inline-block w-2 h-4 bg-accent-teal ml-1 animate-pulse" />
-          </div>
         </div>
-      </GlassPanel>
 
-      <!-- CTA -->
-      <div class="mt-8 text-center">
-        <TechButton :href="`mailto:${profile.email}`" variant="primary">
-          Send Email →
-        </TechButton>
+        <div class="border-t border-stone-light pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="font-mono text-xs text-stone">
+            STATUS: <span class="text-vermillion font-bold">ACCEPTING INQUIRIES</span>
+          </div>
+          <TechButton :href="`mailto:${profile.email}`" variant="primary">
+            Send Email Dispatch &rarr;
+          </TechButton>
+        </div>
       </div>
     </div>
   </section>

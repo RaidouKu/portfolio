@@ -38,19 +38,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative min-h-screen grid-bg">
+  <div class="relative min-h-screen bg-cream text-ink paper-grain">
     <a href="#main-content" class="skip-link">Skip to content</a>
 
     <BootSequence v-if="showBoot" @complete="onBootComplete" />
 
     <template v-if="isComplete">
-      <div class="scanlines" aria-hidden="true"></div>
-      <div class="scanline-sweep" aria-hidden="true"></div>
-      <div class="noise-overlay" aria-hidden="true"></div>
-
       <TopNav :active-section="activeSection" />
 
-      <main id="main-content" class="relative z-10 pt-12">
+      <main id="main-content" class="relative z-10 pt-14">
         <HeroSection />
         <AboutSection />
         <ProjectSection />

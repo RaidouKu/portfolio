@@ -4,37 +4,40 @@ export default {
   theme: {
     extend: {
       colors: {
-        'bg-primary': '#0a0e14',
-        'bg-secondary': '#111923',
-        'bg-hover': '#16212d',
-        'accent-teal': '#00e5c3',
-        'accent-teal-hover': '#33ebd1',
-        'accent-teal-active': '#00ccad',
-        'accent-amber': '#f0a030',
-        'accent-amber-hover': '#f3b355',
-        'accent-red': '#ff3b4e',
-        'accent-red-hover': '#ff6271',
-        'text-primary': '#e8ece4',
-        'text-muted': '#5a6a7a',
+        cream: {
+          DEFAULT: '#f5f0e8',
+          dark: '#ece7dd',
+          darker: '#ddd7cc',
+        },
+        indigo: {
+          DEFAULT: '#1a1a2e',
+          light: '#2a2a4a',
+          lighter: '#3a3a5a',
+        },
+        vermillion: {
+          DEFAULT: '#c0392b',
+          light: '#e74c3c',
+          dark: '#962d22',
+        },
+        ochre: {
+          DEFAULT: '#c8a951',
+          light: '#d4bc6a',
+        },
+        ink: '#1a1a1a',
+        stone: {
+          DEFAULT: '#6b6b6b',
+          light: '#d4cfc6',
+          lighter: '#e8e3da',
+        },
       },
       fontFamily: {
-        display: ['Orbitron', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
         heading: ['"Space Grotesk"', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
-      borderRadius: {
-        panel: '4px',
-      },
       maxWidth: {
         content: '1200px',
-      },
-      boxShadow: {
-        'glow-teal': '0 0 15px rgba(0, 229, 195, 0.4)',
-        'glow-teal-sm': '0 0 8px rgba(0, 229, 195, 0.3)',
-        'glow-amber': '0 0 15px rgba(240, 160, 48, 0.4)',
-        'panel': '0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 195, 0.05)',
-        'panel-hover': '0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 229, 195, 0.1)',
       },
     },
   },

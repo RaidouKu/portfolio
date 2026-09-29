@@ -4,28 +4,31 @@
 
 @layer base {
   :root {
-    --accent-teal: #00e5c3;
-    --accent-amber: #f0a030;
-    --accent-red: #ff3b4e;
-    --bg-primary: #0a0e14;
-    --bg-secondary: #111923;
-    --text-primary: #e8ece4;
-    --text-muted: #5a6a7a;
-    --border-glow: rgba(0, 229, 195, 0.15);
+    --vermillion: #c0392b;
+    --cream: #f5f0e8;
+    --ink: #1a1a1a;
+    --indigo: #1a1a2e;
+    --stone: #6b6b6b;
+    --stone-light: #d4cfc6;
   }
 
   body {
-    @apply bg-bg-primary text-text-primary font-body antialiased overflow-x-hidden;
+    @apply bg-cream text-ink font-body antialiased overflow-x-hidden;
+  }
+
+  ::selection {
+    background: #c0392b;
+    color: #f5f0e8;
   }
 
   *:focus-visible {
-    outline: 2px solid var(--accent-teal);
+    outline: 2px solid var(--vermillion);
     outline-offset: 2px;
   }
 
   /* Skip-to-content link */
   .skip-link {
-    @apply absolute -translate-y-full bg-accent-teal text-bg-primary font-mono text-sm px-4 py-2 z-50;
+    @apply absolute -translate-y-full bg-vermillion text-cream font-mono text-sm px-4 py-2 z-50;
     transition: transform 0.2s ease;
   }
   .skip-link:focus {
@@ -34,18 +37,20 @@
 
   /* Placeholder marker styling */
   .placeholder-marker {
-    @apply border border-dashed border-text-muted px-3 py-2 text-text-muted font-mono text-sm italic;
+    @apply border border-dashed border-stone px-3 py-2 text-stone font-mono text-sm italic;
   }
-}
 
-@layer utilities {
-  .text-glow-teal {
-    text-shadow: 0 0 5px rgba(0, 229, 195, 0.6),
-                 0 0 10px rgba(0, 229, 195, 0.4),
-                 0 0 20px rgba(0, 229, 195, 0.2);
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
   }
-  .text-glow-amber {
-    text-shadow: 0 0 5px rgba(240, 160, 48, 0.6),
-                 0 0 10px rgba(240, 160, 48, 0.4);
+  ::-webkit-scrollbar-track {
+    background: #ece7dd;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4cfc6;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c0392b;
   }
 }

@@ -25,13 +25,22 @@ onUnmounted(() => {
 
 <template>
   <footer
-    class="relative z-10 h-8 bg-bg-secondary border-t border-text-muted/20 flex items-center justify-between px-4 sm:px-6 font-mono text-[11px] text-text-muted"
+    class="relative z-10 bg-cream-dark border-t-2 border-ink py-6 px-4 sm:px-6 lg:px-12 font-mono text-xs text-stone"
   >
-    <span>&copy; {{ currentYear }} RaidouKu</span>
-    <span class="hidden sm:inline">SYS.UPTIME: {{ uptime }}</span>
-    <span>
-      STATUS: <span class="text-accent-teal">ONLINE</span>
-      <span class="inline-block w-1.5 h-1.5 bg-accent-teal rounded-full ml-1 animate-pulse" />
-    </span>
+    <div class="max-w-content mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-vermillion rounded-full"></span>
+        <span class="font-bold text-ink">&copy; {{ currentYear }} RAIDOUKU</span>
+        <span>&mdash; LEBRON JAMES PANGAN</span>
+      </div>
+
+      <div class="hidden md:inline text-stone">
+        SESSION UPTIME: <span class="text-ink font-semibold">{{ uptime }}</span>
+      </div>
+
+      <div class="text-[11px] text-stone tracking-wider">
+        NATIONAL COLLEGE OF SCIENCE AND TECHNOLOGY
+      </div>
+    </div>
   </footer>
 </template>
