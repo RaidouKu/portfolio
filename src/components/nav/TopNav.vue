@@ -33,11 +33,11 @@ function scrollTo(id) {
         class="flex items-center gap-2 group cursor-pointer"
         @click="scrollTo('hero')"
       >
-        <span class="w-6 h-6 border-2 border-vermillion rounded-full flex items-center justify-center font-display font-extrabold text-[10px] text-vermillion group-hover:bg-vermillion group-hover:text-cream transition-colors">
-          KU
+        <span class="w-6 h-6 border-2 border-vermillion rounded-full flex items-center justify-center font-display font-extrabold text-[9px] text-vermillion group-hover:bg-vermillion group-hover:text-cream transition-colors">
+          LJ
         </span>
         <span class="font-display font-extrabold text-sm tracking-tight text-ink group-hover:text-vermillion transition-colors">
-          RAIDOUKU
+          LEBRON JAMES
         </span>
       </button>
 

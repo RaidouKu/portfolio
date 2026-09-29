@@ -85,7 +85,7 @@ onMounted(() => {
         <div class="font-mono text-xs text-stone tracking-[0.2em] uppercase">
           EDITION // 2026
         </div>
-        <div class="hanko">KU</div>
+        <div class="hanko">LJ</div>
       </div>
 
       <!-- Main typography -->
@@ -94,10 +94,10 @@ onMounted(() => {
           PORTFOLIO ARCHIVE
         </div>
         <h1 class="font-display font-extrabold text-4xl text-ink tracking-tight mb-1">
-          RAIDOUKU
+          LEBRON JAMES
         </h1>
         <p class="font-mono text-xs text-stone uppercase tracking-wider">
-          Lebron James Pangan &mdash; NCST
+          Pangan &mdash; NCST
         </p>
       </div>
 

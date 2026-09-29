@@ -71,6 +71,7 @@ onMounted(() => {
 
             <div class="pt-4 border-t border-stone-light">
               <div class="font-mono text-xs text-stone space-y-1.5">
+                <div><span class="text-ink font-semibold">SUBJECT:</span> {{ profile.name }}</div>
                 <div><span class="text-ink font-semibold">AFFILIATION:</span> {{ profile.school }}</div>
                 <div><span class="text-ink font-semibold">ACADEMIC:</span> B.S. Information Technology</div>
                 <div><span class="text-ink font-semibold">FOCUS:</span> Interface Ergonomics &amp; Web Architectures</div>
@@ -106,6 +107,60 @@ onMounted(() => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub Contributions & Code Activity Card -->
+      <div class="mt-8 bg-cream-dark border-2 border-ink p-7 shadow-[6px_6px_0px_0px_#1a1a1a]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-stone-light gap-2">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 bg-vermillion rounded-full"></span>
+            <div>
+              <span class="font-mono text-xs font-bold text-vermillion tracking-widest uppercase block">
+                ACTIVITY ARCHIVE
+              </span>
+              <h3 class="font-display font-extrabold text-lg text-ink">
+                GITHUB CODE COMMITS &amp; CONTRIBUTIONS
+              </h3>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a
+              :href="profile.github"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs text-ink hover:text-vermillion font-bold underline underline-offset-4 decoration-vermillion/40 transition-colors"
+            >
+              @{{ profile.githubUsername }} on GitHub &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Heatmap Container -->
+        <div class="bg-cream border border-stone-light p-4 overflow-x-auto">
+          <img
+            :src="`https://ghchart.rshah.org/c0392b/${profile.githubUsername}`"
+            :alt="`${profile.name}'s GitHub Contributions`"
+            class="w-full min-w-[650px] h-auto block select-none"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Footer / Metadata for activity -->
+        <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between font-mono text-[11px] text-stone gap-2 pt-2">
+          <div>
+            // SOURCE: LIVE GITHUB COMMITS MATRIX (AUTO-SYNCED)
+          </div>
+          <div class="flex items-center gap-3">
+            <span>LESS</span>
+            <div class="flex items-center gap-1">
+              <span class="w-2.5 h-2.5 bg-[#eeeeee] border border-stone-light"></span>
+              <span class="w-2.5 h-2.5 bg-[#eec8c4]"></span>
+              <span class="w-2.5 h-2.5 bg-[#df7d74]"></span>
+              <span class="w-2.5 h-2.5 bg-[#c0392b]"></span>
+            </div>
+            <span>MORE</span>
           </div>
         </div>
       </div>

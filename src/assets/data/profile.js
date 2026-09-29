@@ -1,11 +1,12 @@
 export const profile = {
   name: 'Lebron James Pangan',
-  alias: 'RaidouKu',
+  alias: 'Lebron James',
   tagline: 'UI/UX Designer & Developer',
   bio: '[PLACEHOLDER: 2-3 sentences about who you are, what you\'re passionate about, what drives you]',
   school: 'National College of Science and Technology',
   email: 'pangan.lebronjames1@ncst.edu.ph',
   github: 'https://github.com/RaidouKu',
+  githubUsername: 'RaidouKu',
   socials: {
     linkedin: null,
     twitter: null,

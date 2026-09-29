@@ -81,13 +81,13 @@ onMounted(() => {
               </span>
             </div>
 
-            <!-- Big Display Alias & Hanko -->
+            <!-- Big Display Name & Hanko -->
             <div class="flex items-start gap-4 sm:gap-6 flex-wrap mb-4">
-              <h1 class="font-display font-black text-6xl sm:text-7xl lg:text-8xl tracking-tight text-ink uppercase leading-none">
-                {{ profile.alias }}<span class="text-vermillion">.</span>
+              <h1 class="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-tight text-ink uppercase leading-none">
+                LEBRON JAMES<span class="text-vermillion">.</span>
               </h1>
               <div class="hanko hanko--lg mt-1 sm:mt-2">
-                KU
+                LJ
               </div>
             </div>
 
@@ -95,7 +95,7 @@ onMounted(() => {
             <div class="rule-red w-32 my-6"></div>
 
             <!-- Full Name & Subtitle -->
-            <h2 class="font-heading font-bold text-2xl sm:text-3xl text-ink tracking-tight mb-2">
+            <h2 class="font-heading font-bold text-xl sm:text-2xl text-stone tracking-tight mb-2">
               {{ profile.name }}
             </h2>
             <p class="font-mono text-sm sm:text-base text-vermillion font-bold tracking-widest uppercase mb-4">
@@ -134,8 +134,12 @@ onMounted(() => {
             </div>
             <div class="font-mono text-xs text-stone space-y-2">
               <div class="flex justify-between">
-                <span>IDENTITY:</span>
-                <span class="text-ink font-bold">{{ profile.alias }}</span>
+                <span>NAME:</span>
+                <span class="text-ink font-bold">{{ profile.name }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>GITHUB:</span>
+                <span class="text-ink font-bold">@{{ profile.githubUsername }}</span>
               </div>
               <div class="flex justify-between">
                 <span>DISCIPLINE:</span>

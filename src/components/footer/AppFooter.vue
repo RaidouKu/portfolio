@@ -30,8 +30,7 @@ onUnmounted(() => {
     <div class="max-w-content mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 bg-vermillion rounded-full"></span>
-        <span class="font-bold text-ink">&copy; {{ currentYear }} RAIDOUKU</span>
-        <span>&mdash; LEBRON JAMES PANGAN</span>
+        <span class="font-bold text-ink">&copy; {{ currentYear }} LEBRON JAMES PANGAN</span>
       </div>
 
       <div class="hidden md:inline text-stone">

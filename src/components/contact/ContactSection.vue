@@ -65,7 +65,7 @@ onMounted(() => {
             </div>
           </div>
           <div class="hanko">
-            KU
+            LJ
           </div>
         </div>
 
