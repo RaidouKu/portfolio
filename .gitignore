@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+
+# Superpowers / SDD scratch and artifacts
+.superpowers/
+
+# Environment / local
+.env.local
+.DS_Store
+Thumbs.db
