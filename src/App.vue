@@ -6,6 +6,9 @@ import BootSequence from './components/boot/BootSequence.vue'
 import TopNav from './components/nav/TopNav.vue'
 import HeroSection from './components/hero/HeroSection.vue'
 import AboutSection from './components/about/AboutSection.vue'
+import ProjectSection from './components/projects/ProjectSection.vue'
+import ContactSection from './components/contact/ContactSection.vue'
+import AppFooter from './components/footer/AppFooter.vue'
 
 const { showBoot, isComplete, completeBoot } = useBootSequence()
 
@@ -48,19 +51,13 @@ onUnmounted(() => {
       <TopNav :active-section="activeSection" />
 
       <main id="main-content" class="relative z-10 pt-12">
-        <!-- Section components will be added in Tasks 6-8 -->
         <HeroSection />
         <AboutSection />
-        <section id="project-enrollment" class="min-h-screen flex items-center justify-center">
-          <p class="text-accent-teal font-mono">[PROJECT 01]</p>
-        </section>
-        <section id="project-kickcraft" class="min-h-screen flex items-center justify-center">
-          <p class="text-accent-teal font-mono">[PROJECT 02]</p>
-        </section>
-        <section id="contact" class="min-h-screen flex items-center justify-center">
-          <p class="text-accent-teal font-mono">[CONTACT]</p>
-        </section>
+        <ProjectSection />
+        <ContactSection />
       </main>
+
+      <AppFooter />
     </template>
   </div>
 </template>
