@@ -97,7 +97,7 @@ onMounted(() => {
           LEBRON JAMES
         </h1>
         <p class="font-mono text-xs text-stone uppercase tracking-wider">
-          Pangan &mdash; NCST
+          Pangan // NCST
         </p>
       </div>
 

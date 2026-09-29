@@ -3,7 +3,7 @@ export const profile = {
   displayName: 'Lebron James',
   avatarUrl: null, // Set to path e.g. '/assets/images/profile.jpg' when ready
   tagline: 'UI/UX Designer & Developer',
-  bio: `I am a 3rd-year Bachelor of Science in Information Technology (BSIT) student at the National College of Science and Technology (NCST). My work lives at the intersection of user interface ergonomics and full-stack software development—transforming conceptual wireframes into accessible, high-performance web applications.
+  bio: `I am a 3rd-year Bachelor of Science in Information Technology (BSIT) student at the National College of Science and Technology (NCST). My work lives at the intersection of user interface ergonomics and full-stack software development, transforming conceptual wireframes into accessible, high-performance web applications.
 
 Currently, I am actively broadening my engineering spectrum across both ends of the stack. On the frontend, I build responsive, component-driven interfaces with Vue and Tailwind CSS, focusing on tactile micro-interactions and rigorous typography. On the backend, I design relational database architectures and server-side systems using PHP and MySQL, ensuring that every interface is backed by dependable logic.
 
