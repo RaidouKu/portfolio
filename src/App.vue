@@ -4,6 +4,7 @@ import { useBootSequence } from './composables/useBootSequence.js'
 import { useScrollSpy } from './composables/useScrollSpy.js'
 import BootSequence from './components/boot/BootSequence.vue'
 import TopNav from './components/nav/TopNav.vue'
+import HeroSection from './components/hero/HeroSection.vue'
 
 const { showBoot, isComplete, completeBoot } = useBootSequence()
 
@@ -47,9 +48,7 @@ onUnmounted(() => {
 
       <main id="main-content" class="relative z-10 pt-12">
         <!-- Section components will be added in Tasks 6-8 -->
-        <section id="hero" class="min-h-screen flex items-center justify-center">
-          <p class="text-accent-teal font-mono">[HERO SECTION]</p>
-        </section>
+        <HeroSection />
         <section id="about" class="min-h-screen flex items-center justify-center">
           <p class="text-accent-teal font-mono">[ABOUT SECTION]</p>
         </section>
