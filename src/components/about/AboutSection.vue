@@ -32,27 +32,61 @@ const allSkills = [
 // Default selected skill is JavaScript
 const selectedSkill = ref(allSkills[0])
 
+let audioCtxInstance = null
+
+function getAudioContext() {
+  if (!audioCtxInstance) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext
+    if (AudioCtx) {
+      audioCtxInstance = new AudioCtx()
+    }
+  }
+  if (audioCtxInstance && audioCtxInstance.state === 'suspended') {
+    audioCtxInstance.resume()
+  }
+  return audioCtxInstance
+}
+
 function playSwitchSound() {
   clickCount.value++
   if (!soundEnabled.value) return
   try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext
-    if (!AudioCtx) return
-    const ctx = new AudioCtx()
-    const osc = ctx.createOscillator()
-    const gain = ctx.createGain()
-    osc.type = 'triangle'
-    osc.frequency.setValueAtTime(170, ctx.currentTime)
-    osc.frequency.exponentialRampToValueAtTime(32, ctx.currentTime + 0.04)
+    const ctx = getAudioContext()
+    if (!ctx) return
 
-    gain.gain.setValueAtTime(0.25, ctx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04)
+    const now = ctx.currentTime
 
-    osc.connect(gain)
-    gain.connect(ctx.destination)
+    // 1. Tactile Click Transient (High-Frequency Mechanical Snap)
+    const clickOsc = ctx.createOscillator()
+    const clickGain = ctx.createGain()
+    clickOsc.type = 'square'
+    clickOsc.frequency.setValueAtTime(2200, now)
+    clickOsc.frequency.exponentialRampToValueAtTime(500, now + 0.018)
 
-    osc.start()
-    osc.stop(ctx.currentTime + 0.045)
+    clickGain.gain.setValueAtTime(0.7, now)
+    clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.022)
+
+    clickOsc.connect(clickGain)
+    clickGain.connect(ctx.destination)
+
+    clickOsc.start(now)
+    clickOsc.stop(now + 0.025)
+
+    // 2. Resonant Housing Thock (Deep Mechanical Bottom-Out Body)
+    const thockOsc = ctx.createOscillator()
+    const thockGain = ctx.createGain()
+    thockOsc.type = 'triangle'
+    thockOsc.frequency.setValueAtTime(340, now)
+    thockOsc.frequency.exponentialRampToValueAtTime(70, now + 0.065)
+
+    thockGain.gain.setValueAtTime(0.85, now)
+    thockGain.gain.exponentialRampToValueAtTime(0.001, now + 0.075)
+
+    thockOsc.connect(thockGain)
+    thockGain.connect(ctx.destination)
+
+    thockOsc.start(now)
+    thockOsc.stop(now + 0.08)
   } catch (e) {
     // Audio context may require prior user interaction
   }
