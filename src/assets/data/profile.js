@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Lebron James Pangan',
   displayName: 'Lebron James',
-  avatarUrl: null, // Set to path e.g. '/assets/images/profile.jpg' when ready
+  avatarUrl: './images/profile.png',
   tagline: 'UI/UX Designer & Developer',
   bio: `I am a third-year Bachelor of Science in Information Technology student at the National College of Science and Technology. My academic and practical focus centers on the convergence of human-centered interface design and full-stack software architecture, translating conceptual product requirements into accessible, robust, and performant web applications.
 
