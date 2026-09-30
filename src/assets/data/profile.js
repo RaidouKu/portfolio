@@ -3,11 +3,11 @@ export const profile = {
   displayName: 'Lebron James',
   avatarUrl: null, // Set to path e.g. '/assets/images/profile.jpg' when ready
   tagline: 'UI/UX Designer & Developer',
-  bio: `I am a 3rd-year Bachelor of Science in Information Technology (BSIT) student at the National College of Science and Technology (NCST). My work lives at the intersection of user interface ergonomics and full-stack software development, transforming conceptual wireframes into accessible, high-performance web applications.
+  bio: `I am a third-year Bachelor of Science in Information Technology student at the National College of Science and Technology. My academic and practical focus centers on the convergence of human-centered interface design and full-stack software architecture, translating conceptual product requirements into accessible, robust, and performant web applications.
 
-Currently, I am actively broadening my engineering spectrum across both ends of the stack. On the frontend, I build responsive, component-driven interfaces with Vue and Tailwind CSS, focusing on tactile micro-interactions and rigorous typography. On the backend, I design relational database architectures and server-side systems using PHP and MySQL, ensuring that every interface is backed by dependable logic.
+To establish comprehensive technical breadth, I actively advance my capabilities across the full engineering lifecycle. On the frontend, I engineer modular, component-driven user interfaces using modern JavaScript, Vue.js, and utility-first styling frameworks, prioritizing semantic structure, typographical hierarchy, and fluid micro-interactions. On the backend, I architect relational database schemas, construct server-side application logic, and handle database transactions using PHP and MySQL to ensure systemic stability and data integrity.
 
-My goal is end-to-end craft: shaping intuitive user experiences in Figma and engineering them into clean, production-ready code without relying on generic templates.`,
+My methodology emphasizes disciplined, end-to-end execution. By maintaining equal rigor in visual ergonomics during the Figma prototyping phase and computational cleanliness throughout implementation, I construct digital systems that are purposeful, scalable, and devoid of generic templates.`,
   school: 'National College of Science and Technology',
   email: 'pangan.lebronjames1@ncst.edu.ph',
   github: 'https://github.com/RaidouKu',

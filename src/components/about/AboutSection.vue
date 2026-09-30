@@ -108,24 +108,90 @@ onMounted(() => {
               <span class="font-mono text-[11px] text-stone">NCST-PH</span>
             </div>
 
-            <div class="text-ink leading-relaxed font-body text-sm sm:text-base mb-6 space-y-3">
-              <span v-if="profile.bio.startsWith('[PLACEHOLDER')" class="placeholder-marker block">
+            <!-- Dossier Bio Prose with Editorial Accents -->
+            <div class="space-y-4 mb-6">
+              <div
+                v-if="profile.bio.startsWith('[PLACEHOLDER')"
+                class="placeholder-marker block"
+              >
                 {{ profile.bio }}
-              </span>
+              </div>
               <template v-else>
-                <p v-for="(paragraph, idx) in profile.bio.split('\n\n')" :key="idx">
-                  {{ paragraph }}
-                </p>
+                <div
+                  v-for="(paragraph, idx) in profile.bio.split('\n\n')"
+                  :key="idx"
+                  class="relative pl-3.5 border-l-2 border-stone-light hover:border-vermillion transition-colors"
+                >
+                  <span class="block font-mono text-[9px] font-bold text-vermillion uppercase tracking-widest mb-1 select-none">
+                    SECTION 0{{ idx + 1 }} // {{ idx === 0 ? 'ACADEMIC_FOUNDATION' : idx === 1 ? 'FULLSTACK_SCOPE' : 'ENGINEERING_METHOD' }}
+                  </span>
+                  <p class="font-heading text-sm sm:text-[15px] text-ink leading-relaxed font-normal">
+                    {{ paragraph }}
+                  </p>
+                </div>
               </template>
             </div>
 
-            <div class="pt-4 border-t border-stone-light">
-              <div class="font-mono text-xs text-stone space-y-1.5">
-                <div><span class="text-ink font-semibold">SUBJECT:</span> {{ profile.name }}</div>
-                <div><span class="text-ink font-semibold">AFFILIATION:</span> {{ profile.school }}</div>
-                <div><span class="text-ink font-semibold">YEAR LEVEL:</span> 3rd Year Undergraduate</div>
-                <div><span class="text-ink font-semibold">PROGRAM:</span> B.S. Information Technology (BSIT)</div>
-                <div><span class="text-ink font-semibold">DISCIPLINE:</span> Frontend &amp; Backend Engineering</div>
+            <!-- Enlarged Dossier Credential Plate -->
+            <div class="pt-5 border-t-2 border-ink">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-mono text-xs font-bold text-vermillion tracking-widest uppercase">
+                  REGISTRATION DATA // 登録情報
+                </span>
+                <span class="w-2 h-2 bg-vermillion rounded-full"></span>
+              </div>
+
+              <div class="space-y-2">
+                <!-- Subject Name -->
+                <div class="p-2.5 sm:p-3 bg-cream border border-stone-light hover:border-ink transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <span class="font-mono text-xs font-bold text-stone tracking-wider uppercase">
+                    SUBJECT NAME
+                  </span>
+                  <span class="font-heading font-extrabold text-sm sm:text-base text-ink tracking-tight">
+                    {{ profile.name }}
+                  </span>
+                </div>
+
+                <!-- Affiliation -->
+                <div class="p-2.5 sm:p-3 bg-cream border border-stone-light hover:border-ink transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <span class="font-mono text-xs font-bold text-stone tracking-wider uppercase">
+                    AFFILIATION
+                  </span>
+                  <span class="font-heading font-bold text-sm sm:text-base text-ink tracking-tight text-right">
+                    {{ profile.school }}
+                  </span>
+                </div>
+
+                <!-- Year Level & Program Dual Plate -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div class="p-2.5 sm:p-3 bg-cream border border-stone-light hover:border-ink transition-colors">
+                    <span class="block font-mono text-[10px] font-bold text-stone tracking-wider uppercase mb-0.5">
+                      YEAR LEVEL
+                    </span>
+                    <span class="font-heading font-extrabold text-sm sm:text-base text-vermillion tracking-tight">
+                      3rd Year Undergraduate
+                    </span>
+                  </div>
+
+                  <div class="p-2.5 sm:p-3 bg-cream border border-stone-light hover:border-ink transition-colors">
+                    <span class="block font-mono text-[10px] font-bold text-stone tracking-wider uppercase mb-0.5">
+                      DEGREE PROGRAM
+                    </span>
+                    <span class="font-heading font-bold text-sm sm:text-base text-ink tracking-tight">
+                      B.S. Information Technology
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Core Discipline -->
+                <div class="p-2.5 sm:p-3 bg-cream border border-stone-light hover:border-ink transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <span class="font-mono text-xs font-bold text-stone tracking-wider uppercase">
+                    CORE DISCIPLINE
+                  </span>
+                  <span class="font-heading font-bold text-sm sm:text-base text-ink tracking-tight">
+                    Frontend &amp; Backend Engineering
+                  </span>
+                </div>
               </div>
             </div>
           </div>
