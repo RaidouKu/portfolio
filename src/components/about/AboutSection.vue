@@ -8,29 +8,29 @@ const sectionRef = ref(null)
 const soundEnabled = ref(true)
 const clickCount = ref(0)
 
-// Assemble 4x3 mechanical macropad skills with 3D colorway variants
+// Assemble 4x3 mechanical macropad skills with authentic tech brand colorways
 const allSkills = [
-  // Row 1: Design & Creative (Vermillion Artisan Novelty Caps)
-  { ...profile.skills.design[0], category: 'DESIGN & UI/UX', variant: 'vermillion' },
-  { ...profile.skills.design[1], category: 'DESIGN & UI/UX', variant: 'vermillion' },
-  { ...profile.skills.design[2], category: 'DESIGN & UI/UX', variant: 'vermillion' },
-  { ...profile.skills.tools[0], category: 'DESIGN & UI/UX', variant: 'vermillion' },
+  // Row 1: Frontend Web Technologies
+  { ...profile.skills.frontend[1], category: 'FRONTEND LOGIC' },       // JavaScript (Yellow #f7df1e)
+  { ...profile.skills.frontend[2], category: 'FRONTEND FRAMEWORK' },   // Vue.js (Emerald #42b883)
+  { ...profile.skills.frontend[0], category: 'SEMANTIC WEB' },         // HTML & CSS (Orange #e34f26)
+  { ...profile.skills.frontend[3], category: 'UTILITY STYLING' },      // Tailwind CSS (Cyan #06b6d4)
 
-  // Row 2: Frontend Engineering (Cream Alphas + Vue Accent)
-  { ...profile.skills.frontend[0], category: 'FRONTEND STACK', variant: 'default' },
-  { ...profile.skills.frontend[1], category: 'FRONTEND STACK', variant: 'default' },
-  { ...profile.skills.frontend[2], category: 'FRONTEND STACK', variant: 'vermillion' },
-  { ...profile.skills.frontend[3], category: 'FRONTEND STACK', variant: 'default' },
+  // Row 2: Core Programming & Systems
+  { ...profile.skills.programming[0], category: 'CORE PROGRAMMING' },  // Python (Blue #3776ab)
+  { ...profile.skills.programming[1], category: 'SYSTEMS PROGRAMMING' },// C++ (Deep Blue #00599c)
+  { ...profile.skills.backend[0], category: 'SERVER-SIDE LOGIC' },     // PHP (Indigo #777bb4)
+  { ...profile.skills.backend[1], category: 'RELATIONAL DATABASE' },   // MySQL (Teal #00758f)
 
-  // Row 3: Systems & Tooling (Dark & Ochre Modifiers)
-  { ...profile.skills.backend[0], category: 'BACKEND SYSTEMS', variant: 'ink' },
-  { ...profile.skills.backend[1], category: 'BACKEND SYSTEMS', variant: 'ink' },
-  { ...profile.skills.tools[1], category: 'TOOLING & GIT', variant: 'ochre' },
-  { ...profile.skills.tools[2], category: 'TOOLING & DEV', variant: 'ochre' },
+  // Row 3: Interface Design & Engineering Tooling
+  { ...profile.skills.design[0], category: 'ERGONOMICS & FLOW' },      // UI/UX Design (Violet #8b5cf6)
+  { ...profile.skills.design[1], category: 'DESIGN SYSTEMS' },         // Figma (Coral #f24e1e)
+  { ...profile.skills.tools[0], category: 'VERSION CONTROL' },         // Git (Orange #f05032)
+  { ...profile.skills.tools[1], category: 'DEVELOPER WORKSPACE' },     // VS Code (Azure #007acc)
 ]
 
-// Default selected skill is Vue.js
-const selectedSkill = ref(allSkills[6])
+// Default selected skill is JavaScript
+const selectedSkill = ref(allSkills[0])
 
 function playSwitchSound() {
   clickCount.value++
@@ -144,7 +144,7 @@ onMounted(() => {
           <div class="lg:col-span-5 bg-cream border-2 border-ink p-5 sm:p-6 shadow-[4px_4px_0px_0px_#1a1a1a]">
             <div class="flex items-center justify-between border-b border-stone-light pb-3 mb-4">
               <span class="font-mono text-xs font-bold text-vermillion tracking-widest uppercase">
-                REGISTRATION DATA // 登録情報
+                REGISTRATION DATA // CREDENTIALS
               </span>
               <span class="w-2 h-2 bg-vermillion rounded-full"></span>
             </div>
@@ -213,7 +213,7 @@ onMounted(() => {
             <span class="w-3 h-3 bg-vermillion rounded-full animate-pulse" />
             <div>
               <span class="font-mono text-xs font-bold text-vermillion tracking-widest uppercase block">
-                CAPABILITIES // SKILL MATRIX
+                CAPABILITIES // TECH MATRIX
               </span>
               <h3 class="font-display font-black text-2xl text-ink">
                 3D MECHANICAL KEYCAP SWITCHBOARD
@@ -228,7 +228,7 @@ onMounted(() => {
               class="px-3 py-1.5 border-2 border-ink bg-cream text-ink font-bold hover:bg-ink hover:text-cream transition-colors cursor-pointer shadow-[2px_2px_0px_0px_#1a1a1a]"
               @click="soundEnabled = !soundEnabled"
             >
-              {{ soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF' }}
+              {{ soundEnabled ? '🔊 MECHANICAL SFX: ON' : '🔇 SFX: MUTED' }}
             </button>
             <span class="text-stone">
               KEYSTROKES: <strong class="text-vermillion font-extrabold text-sm">{{ clickCount }}</strong>
@@ -245,34 +245,33 @@ onMounted(() => {
                 v-for="skill in allSkills"
                 :key="skill.name"
                 :skill="skill"
-                :variant="skill.variant"
                 :active="selectedSkill?.name === skill.name"
                 @click="handleKeySelect"
               />
             </div>
 
-            <!-- Keycap Legend -->
+            <!-- Keycap Legend with Programming Colors -->
             <div class="mt-6 pt-4 border-t border-stone-light flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] text-stone">
               <div class="flex items-center gap-4 flex-wrap">
                 <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 bg-vermillion border border-ink"></span>
-                  DESIGN &amp; NOVELTY
+                  <span class="w-3 h-3 bg-[#f7df1e] border border-ink"></span>
+                  JAVASCRIPT &amp; WEB
                 </span>
                 <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 bg-cream border border-ink"></span>
-                  FRONTEND ALPHAS
+                  <span class="w-3 h-3 bg-[#3776ab] border border-ink"></span>
+                  PYTHON &amp; C++
                 </span>
                 <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 bg-indigo border border-ink"></span>
-                  BACKEND
+                  <span class="w-3 h-3 bg-[#777bb4] border border-ink"></span>
+                  PHP &amp; MYSQL
                 </span>
                 <span class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 bg-ochre border border-ink"></span>
-                  DEV TOOLS
+                  <span class="w-3 h-3 bg-[#8b5cf6] border border-ink"></span>
+                  UI/UX &amp; FIGMA
                 </span>
               </div>
               <span class="text-vermillion font-bold">
-                * CLICK ANY KEYCAP FOR TACTILE SFX
+                * CLICK ANY KEYCAP FOR MECHANICAL SFX
               </span>
             </div>
           </div>
@@ -281,10 +280,10 @@ onMounted(() => {
           <div class="lg:col-span-5 bg-cream border-2 border-ink p-6 sm:p-7 shadow-[4px_4px_0px_0px_#1a1a1a]">
             <div class="flex items-center justify-between border-b border-stone-light pb-3 mb-5">
               <span class="font-mono text-xs font-bold text-vermillion tracking-widest uppercase">
-                INSPECTOR // KEY READOUT
+                INSPECTOR // ACTIVE SWITCH
               </span>
               <span class="font-mono text-xs text-stone font-bold">
-                ACTIVE
+                STATUS: READY
               </span>
             </div>
 
@@ -292,7 +291,10 @@ onMounted(() => {
               <div class="flex items-start justify-between gap-3">
                 <div>
                   <div class="flex items-center gap-2 mb-1">
-                    <span class="px-2 py-0.5 bg-vermillion text-cream font-mono text-[10px] font-bold uppercase tracking-wider">
+                    <span
+                      class="px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-cream"
+                      :style="{ backgroundColor: selectedSkill.color, color: selectedSkill.textColor || '#ffffff' }"
+                    >
                       KEY [ {{ selectedSkill.key }} ]
                     </span>
                     <span class="font-mono text-xs text-stone font-bold uppercase">
@@ -303,25 +305,30 @@ onMounted(() => {
                     {{ selectedSkill.name }}
                   </h4>
                 </div>
-                <div class="hanko">
-                  {{ selectedSkill.jp }}
+
+                <!-- Clean Tech Brand Badge (Replaces Hanko) -->
+                <div
+                  class="px-3 py-1.5 border-2 border-ink font-mono font-black text-xs tracking-wider uppercase shadow-[2px_2px_0px_0px_#1a1a1a]"
+                  :style="{ backgroundColor: selectedSkill.color, color: selectedSkill.textColor || '#ffffff' }"
+                >
+                  {{ selectedSkill.tag }}
                 </div>
               </div>
 
-              <!-- Proficiency Gauge -->
+              <!-- Dynamic Proficiency Meter -->
               <div class="p-4 bg-cream-dark border border-stone-light">
                 <div class="flex items-center justify-between mb-2">
                   <span class="font-mono text-xs font-bold text-stone uppercase tracking-wider">
-                    TECHNICAL MASTERY
+                    TECHNICAL PROFICIENCY
                   </span>
-                  <span class="font-display font-black text-xl text-vermillion">
+                  <span class="font-display font-black text-xl text-ink">
                     {{ selectedSkill.level }}%
                   </span>
                 </div>
-                <div class="w-full h-2 bg-stone-light overflow-hidden">
+                <div class="w-full h-2.5 bg-stone-light overflow-hidden">
                   <div
-                    class="h-full bg-vermillion transition-all duration-300"
-                    :style="{ width: `${selectedSkill.level}%` }"
+                    class="h-full transition-all duration-300"
+                    :style="{ width: `${selectedSkill.level}%`, backgroundColor: selectedSkill.color }"
                   />
                 </div>
               </div>
@@ -329,7 +336,7 @@ onMounted(() => {
               <!-- Usage Specification -->
               <div class="space-y-1.5">
                 <span class="font-mono text-xs font-bold text-stone uppercase tracking-wider block">
-                  SYSTEM USAGE &amp; APPLICATION
+                  SYSTEM APPLICATION &amp; COMPETENCY
                 </span>
                 <p class="font-heading text-sm text-ink leading-relaxed">
                   {{ selectedSkill.desc }}
