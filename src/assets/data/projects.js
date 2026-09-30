@@ -28,16 +28,27 @@ export const projects = [
   {
     id: 'kickcraft',
     label: 'CASE_02',
-    title: 'Kickcraft',
-    description: '[PLACEHOLDER: Description of the 3D shoe design website: what it does, the creative challenge, what you learned]',
-    tech: ['[PLACEHOLDER: Tech stack]'],
-    role: '[PLACEHOLDER: Your role]',
-    team: '[PLACEHOLDER: Solo or team size]',
-    status: '[PLACEHOLDER: Completed / In Progress]',
-    imageUrl: null,
-    images: [],
-    imagePlaceholder: 'Kickcraft 3D shoe design interface screenshot',
-    demoUrl: null,
+    title: 'Kickcraft 3D Studio',
+    description: 'Interactive 3D footwear customization platform and digital storefront. Allows customers to configure footwear geometry in real time, customize independent color zones, attach accessory charms, choose sizing, and reserve tailored configurations for in-store pickup.',
+    tech: ['Three.js', 'WebGL', 'JavaScript', 'HTML5 & CSS3', 'PHP'],
+    role: 'UI/UX Designer & 3D Web Developer',
+    team: 'Academic Systems Project',
+    status: 'Completed',
+    imageUrl: './images/projects/kickcraft-landing.png',
+    images: [
+      {
+        url: './images/projects/kickcraft-landing.png',
+        title: 'KickCraft 3D Catalog & Landing Hero',
+        caption: 'Interactive storefront showcase featuring 3D shoe viewport with orbit rotation, catalog search, and reservation tracking.',
+      },
+      {
+        url: './images/projects/kickcraft-studio.png',
+        title: 'Interactive 3D Design Studio Customizer',
+        caption: 'Real-time multi-zone 3D shoe configurator featuring interactive color mapping, modular charm attachments, sizing, and reservation checkout.',
+      },
+    ],
+    imagePlaceholder: 'Kickcraft 3D shoe design studio screenshot',
+    demoUrl: null, // Project is offline, no live link button
     repoUrl: 'https://github.com/hil9-pya/kickcraft',
   },
 ]
