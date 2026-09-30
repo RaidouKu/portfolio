@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { createSectionReveal } from '../../utils/animations.js'
 import TechButton from '../ui/TechButton.vue'
 
@@ -12,6 +12,7 @@ const props = defineProps({
 const cardRef = ref(null)
 const scrollContainer = ref(null)
 const activeImageIndex = ref(0)
+const isModalOpen = ref(false)
 
 function handleScroll(e) {
   const el = e.target
@@ -31,8 +32,38 @@ function scrollToImage(idx) {
   }
 }
 
+function openModal(idx = null) {
+  if (idx !== null) {
+    activeImageIndex.value = idx
+  }
+  isModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+  window.addEventListener('keydown', handleKeydown)
+}
+
+function closeModal() {
+  isModalOpen.value = false
+  document.body.style.overflow = ''
+  window.removeEventListener('keydown', handleKeydown)
+}
+
+function handleKeydown(e) {
+  if (e.key === 'Escape') {
+    closeModal()
+  } else if (e.key === 'ArrowRight' && props.project.images?.length > 1) {
+    activeImageIndex.value = (activeImageIndex.value + 1) % props.project.images.length
+  } else if (e.key === 'ArrowLeft' && props.project.images?.length > 1) {
+    activeImageIndex.value = (activeImageIndex.value - 1 + props.project.images.length) % props.project.images.length
+  }
+}
+
 onMounted(() => {
   createSectionReveal(cardRef.value)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -69,28 +100,42 @@ onMounted(() => {
               </span>
             </div>
 
+            <!-- Action Controls (Maximize & Status) -->
             <div class="flex items-center gap-2">
-              <span class="text-vermillion font-bold uppercase tracking-wider">{{ project.status }}</span>
+              <button
+                v-if="(project.images && project.images.length > 0) || project.imageUrl"
+                type="button"
+                class="flex items-center gap-1 px-2 py-0.5 bg-cream border border-ink text-[10px] font-mono font-bold text-ink hover:bg-vermillion hover:text-cream transition-colors cursor-pointer shadow-[1px_1px_0px_0px_#1a1a1a]"
+                title="Maximize / Fullscreen Preview"
+                @click="openModal(activeImageIndex)"
+              >
+                <span>⛶</span>
+                <span>MAXIMIZE</span>
+              </button>
+              <span class="text-vermillion font-bold uppercase tracking-wider hidden sm:inline">
+                {{ project.status }}
+              </span>
             </div>
           </div>
 
           <!-- Multiple Scrollable Images Case -->
           <div v-if="project.images && project.images.length > 0" class="relative group">
-            <!-- Scrollable Viewport -->
+            <!-- Scrollable Viewport (Fits Entire Screenshot with object-contain) -->
             <div
               ref="scrollContainer"
-              class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar bg-ink"
+              class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar bg-[#0e1017]"
               @scroll.passive="handleScroll"
             >
               <div
                 v-for="(img, imgIdx) in project.images"
                 :key="imgIdx"
-                class="w-full flex-shrink-0 snap-center relative aspect-video flex items-center justify-center bg-ink overflow-hidden"
+                class="w-full flex-shrink-0 snap-center relative h-64 sm:h-80 md:h-96 flex items-center justify-center bg-[#0e1017] p-2 cursor-pointer"
+                @click="openModal(imgIdx)"
               >
                 <img
                   :src="img.url"
                   :alt="img.title || project.title"
-                  class="w-full h-full object-cover object-top select-none"
+                  class="w-full h-full object-contain select-none transition-transform duration-200 group-hover:scale-[1.01]"
                   loading="lazy"
                   width="1200"
                   height="675"
@@ -149,11 +194,15 @@ onMounted(() => {
           </div>
 
           <!-- Single Image Fallback -->
-          <div v-else-if="project.imageUrl" class="aspect-video flex items-center justify-center bg-ink">
+          <div
+            v-else-if="project.imageUrl"
+            class="h-64 sm:h-80 md:h-96 flex items-center justify-center bg-[#0e1017] p-2 cursor-pointer"
+            @click="openModal(0)"
+          >
             <img
               :src="project.imageUrl"
               :alt="project.title"
-              class="w-full h-full object-cover select-none"
+              class="w-full h-full object-contain select-none"
               loading="lazy"
             />
           </div>
@@ -224,5 +273,92 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- FULLSCREEN / MAXIMIZE LIGHTBOX MODAL -->
+    <Teleport to="body">
+      <div
+        v-if="isModalOpen"
+        class="fixed inset-0 z-[9999] flex flex-col justify-between bg-ink/90 backdrop-blur-md p-4 sm:p-6 animate-fadeIn select-none"
+        @click.self="closeModal"
+      >
+        <!-- Modal Top Bar -->
+        <div class="w-full max-w-6xl mx-auto flex items-center justify-between pb-3 border-b border-stone text-cream font-mono">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 bg-vermillion rounded-full"></span>
+            <span class="text-xs uppercase tracking-wider font-bold">
+              {{ project.title }} // SCREEN 0{{ activeImageIndex + 1 }}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <a
+              v-if="project.demoUrl"
+              :href="project.demoUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-cream text-ink text-xs font-bold hover:bg-vermillion hover:text-cream transition-colors"
+            >
+              Open Live Site ↗
+            </a>
+            <button
+              type="button"
+              class="px-3 py-1 bg-vermillion text-cream font-mono text-xs font-bold hover:bg-white hover:text-ink transition-colors cursor-pointer border border-cream/20 shadow-[2px_2px_0px_0px_#1a1a1a]"
+              @click="closeModal"
+            >
+              ✕ CLOSE [ESC]
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal Center Image Viewport with Nav Arrows -->
+        <div class="relative flex-1 w-full max-w-6xl mx-auto flex items-center justify-center p-2 sm:p-4 my-auto overflow-hidden">
+          <button
+            v-if="project.images && project.images.length > 1"
+            type="button"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-cream border-2 border-ink text-ink font-mono font-bold text-lg flex items-center justify-center shadow-[3px_3px_0px_0px_#1a1a1a] hover:bg-vermillion hover:text-cream transition-colors z-20 cursor-pointer"
+            aria-label="Previous image"
+            @click="activeImageIndex = (activeImageIndex - 1 + project.images.length) % project.images.length"
+          >
+            ←
+          </button>
+
+          <img
+            :src="project.images ? project.images[activeImageIndex].url : project.imageUrl"
+            :alt="project.title"
+            class="max-h-[75vh] w-auto max-w-full object-contain border-2 border-cream/40 shadow-2xl bg-black"
+          />
+
+          <button
+            v-if="project.images && project.images.length > 1"
+            type="button"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-cream border-2 border-ink text-ink font-mono font-bold text-lg flex items-center justify-center shadow-[3px_3px_0px_0px_#1a1a1a] hover:bg-vermillion hover:text-cream transition-colors z-20 cursor-pointer"
+            aria-label="Next image"
+            @click="activeImageIndex = (activeImageIndex + 1) % project.images.length"
+          >
+            →
+          </button>
+        </div>
+
+        <!-- Modal Bottom Bar -->
+        <div class="w-full max-w-6xl mx-auto pt-3 border-t border-stone flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-stone gap-2">
+          <div class="text-center sm:text-left text-cream font-medium">
+            {{ project.images ? project.images[activeImageIndex]?.caption : project.title }}
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-stone">USE ← / → KEYS TO SWITCH</span>
+            <div v-if="project.images && project.images.length > 1" class="flex gap-1.5">
+              <button
+                v-for="(img, idx) in project.images"
+                :key="idx"
+                type="button"
+                class="w-3 h-3 rounded-full transition-all cursor-pointer"
+                :class="activeImageIndex === idx ? 'bg-vermillion scale-110' : 'bg-stone/50 hover:bg-stone'"
+                @click="activeImageIndex = idx"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
